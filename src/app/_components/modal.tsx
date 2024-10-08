@@ -9,13 +9,8 @@ type props = {
 };
 
 export function Modal(props: props) {
-  // モーダルの表示を管理するためのstate
   const [isModalOpen, setIsModalOpen] = useState(false);
-
-  // モーダルを開く関数
   const openModal = () => setIsModalOpen(true);
-
-  // モーダルを閉じる関数
   const closeModal = () => setIsModalOpen(false);
 
   return (
@@ -47,7 +42,7 @@ export function Modal(props: props) {
                 className="rounded-full bg-red-500 px-6 py-2 text-white"
                 onClick={() => {
                   // ここに「使っちゃう」ボタンを押したら金額をリセットする処理を書く
-                  setIsModalOpen(false); // モーダルを閉じる
+                  setIsModalOpen(false);
                 }}
               >
                 使っちゃう！

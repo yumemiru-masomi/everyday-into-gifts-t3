@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { Modal } from "~/app/_components/modal";
+// import { Modal } from "~/app/_components/modal";
 
 import { LatestPost } from "~/app/_components/post";
 import { getServerAuthSession } from "~/server/auth";
@@ -10,7 +10,7 @@ export default async function Home() {
 
   void api.post.getLatest.prefetch();
 
-  const data = await api.post.getTotalMessageLength();
+  // const data = await api.post.getTotalMessageLength();
 
   return (
     <HydrateClient>
@@ -27,7 +27,7 @@ export default async function Home() {
             <br />
             溜まったら、その分のお金を自分へのご褒美の金額として何か買っちゃいましょう🥰
           </p>
-          {session?.user && <Modal data={data} />}
+          {/* {session?.user && <Modal data={data} />} */}
           {session?.user && <LatestPost />}
           {session?.user && (
             <div className="flex w-full flex-row items-center justify-end gap-4">

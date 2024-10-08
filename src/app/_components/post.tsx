@@ -23,7 +23,9 @@ export function LatestPost() {
           {latestPost.message}
         </p>
       ) : (
-        <p className="pb-7 text-center text-3xl">You have no posts yet.</p>
+        <p className="pb-7 text-center text-3xl">
+          ここにストレスを吐き出そう！
+        </p>
       )}
       <div className="w-full max-w-xs">
         <form
