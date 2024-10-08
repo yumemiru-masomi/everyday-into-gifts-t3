@@ -39,10 +39,9 @@ export const stressRouter = createTRPCRouter({
     return post ?? null;
   }),
 
-  getTotalMessageLength: protectedProcedure.query(async ({ ctx }) => {
+  getTotalMessageLength: publicProcedure.query(async ({ ctx }) => {
     // 全てのメッセージを取得
     const messages: Post[] = await ctx.db.post.findMany({
-      where: { createdBy: { id: ctx.session.user.id } }, // 特定のユーザーのメッセージを取得
       select: { message: true }, // messageフィールドのみを取得
     });
 
