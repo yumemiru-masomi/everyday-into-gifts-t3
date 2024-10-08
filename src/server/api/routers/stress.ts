@@ -6,7 +6,11 @@ import {
   publicProcedure,
 } from "~/server/api/trpc";
 
-export const postRouter = createTRPCRouter({
+type Post = {
+  message: string;
+};
+
+export const stressRouter = createTRPCRouter({
   hello: publicProcedure
     .input(z.object({ text: z.string() }))
     .query(({ input }) => {
@@ -16,11 +20,11 @@ export const postRouter = createTRPCRouter({
     }),
 
   create: protectedProcedure
-    .input(z.object({ name: z.string().min(1) }))
+    .input(z.object({ message: z.string().min(1) }))
     .mutation(async ({ ctx, input }) => {
       return ctx.db.post.create({
         data: {
-          name: input.name,
+          message: input.message,
           createdBy: { connect: { id: ctx.session.user.id } },
         },
       });
@@ -35,7 +39,18 @@ export const postRouter = createTRPCRouter({
     return post ?? null;
   }),
 
-  getSecretMessage: protectedProcedure.query(() => {
-    return "you can now see this secret message!";
+  getTotalMessageLength: publicProcedure.query(async ({ ctx }) => {
+    // 全てのメッセージを取得
+    const messages: Post[] = await ctx.db.post.findMany({
+      select: { message: true }, // messageフィールドのみを取得
+    });
+
+    // メッセージの文字数を合計
+    const totalLength = messages.reduce(
+      (acc, post) => acc + post.message.length,
+      0,
+    );
+
+    return { totalLength };
   }),
 });
