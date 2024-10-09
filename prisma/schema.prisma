@@ -17,6 +17,7 @@ datasource db {
 model Post {
     id        Int      @id @default(autoincrement())
     message      String
+    status      Boolean  @default(false)  // true = ご褒美に使った, false = 使っていない
     createdAt DateTime @default(now())
     updatedAt DateTime @updatedAt
 

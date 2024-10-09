@@ -1,5 +1,4 @@
 import Link from "next/link";
-import { TotalAmount } from "~/app/_components/totalAmount";
 
 import { LatestPost } from "~/app/_components/post";
 import { getServerAuthSession } from "~/server/auth";
@@ -9,8 +8,6 @@ export default async function Home() {
   const session = await getServerAuthSession();
 
   void api.post.getLatest.prefetch();
-
-  const data = await api.post.getTotalMessageLength();
 
   return (
     <HydrateClient>
@@ -27,7 +24,6 @@ export default async function Home() {
             <br />
             溜まったら、その分のお金を自分へのご褒美の金額として何か買っちゃいましょう🥰
           </p>
-          {session?.user && <TotalAmount data={data} />}
           {session?.user && <LatestPost />}
           {session?.user && (
             <div className="flex w-full flex-row items-center justify-end gap-4">
