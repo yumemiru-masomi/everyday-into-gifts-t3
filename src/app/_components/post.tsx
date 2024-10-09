@@ -6,8 +6,7 @@ import { api } from "~/trpc/react";
 
 export function LatestPost() {
   // totalLengthを取得
-  const { data: totalLengthData, refetch: refetchTotalLength } =
-    api.post.getTotalMessageLength.useQuery();
+  const { data, refetch } = api.post.getTotalMessageLength.useQuery();
   // モーダル
   const [isModalOpen, setIsModalOpen] = useState(false);
   const openModal = () => setIsModalOpen(true);
@@ -19,8 +18,13 @@ export function LatestPost() {
   const createPost = api.post.create.useMutation({
     onSuccess: async () => {
       await utils.post.invalidate();
-      await refetchTotalLength();
+      await refetch();
       setMessage("");
+    },
+  });
+  const resetAmount = api.post.updateStatus.useMutation({
+    onSuccess: async () => {
+      await refetch();
     },
   });
 
@@ -28,7 +32,7 @@ export function LatestPost() {
     <div className="flex flex-col items-center">
       <div className="justify-cente container flex flex-col items-center">
         <p className="text-7xl">
-          {totalLengthData?.totalLength?.toLocaleString() ?? "🥺"}
+          {data?.totalLength?.toLocaleString() ?? "🥺"}
           <span className="text-3xl">円</span>
         </p>
         <button
@@ -45,14 +49,14 @@ export function LatestPost() {
               本当に使ってもいいですか？
             </p>
             <p className="pb-4 text-5xl text-black">
-              {totalLengthData?.totalLength?.toLocaleString() ?? 0}
+              {data?.totalLength?.toLocaleString() ?? 0}
               <span className="text-3xl text-black">円</span>
             </p>
             <div className="flex justify-center gap-4">
               <button
                 className="rounded-full bg-red-500 px-6 py-2 text-white"
                 onClick={() => {
-                  // ここに「使っちゃう」ボタンを押したら金額をリセットする処理を書く
+                  resetAmount.mutate();
                   setIsModalOpen(false);
                 }}
               >

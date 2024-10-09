@@ -39,9 +39,12 @@ export const stressRouter = createTRPCRouter({
     return post ?? null;
   }),
 
-  getTotalMessageLength: publicProcedure.query(async ({ ctx }) => {
+  getTotalMessageLength: protectedProcedure.query(async ({ ctx }) => {
+    const userId = ctx.session.user.id;
+
     // 全てのメッセージを取得
     const messages: Post[] = await ctx.db.post.findMany({
+      where: { createdById: userId, status: false },
       select: { message: true }, // messageフィールドのみを取得
     });
 
@@ -52,5 +55,21 @@ export const stressRouter = createTRPCRouter({
     );
 
     return { totalLength };
+  }),
+
+  updateStatus: protectedProcedure.mutation(async ({ ctx }) => {
+    const userId = ctx.session.user.id;
+
+    // ステータスを更新
+    const updatedPosts = await ctx.db.post.updateMany({
+      where: {
+        createdById: userId, // 現在のユーザーが作成した投稿
+        status: false, // まだ「使っていない」投稿のみ
+      },
+      data: {
+        status: true, // status を true に更新（リセット）
+      },
+    });
+    return updatedPosts;
   }),
 });
