@@ -27,12 +27,7 @@ export default async function Page() {
             <ul className="list-inside list-disc leading-relaxed text-gray-600">
               <li>Google認証により提供される情報</li>
               <li>アカウント情報</li>
-              <li>ユーザーが保存した記事とメモ</li>
               <li>利用履歴</li>
-              <li>
-                Google
-                Analyticsを通じて収集される匿名の利用データ（Cookieの使用を含む）
-              </li>
             </ul>
           </article>
 
@@ -47,9 +42,6 @@ export default async function Page() {
               <li>本アプリの提供および運営のため</li>
               <li>ユーザーサポートのため</li>
               <li>本アプリの改善および新機能の開発のため</li>
-              <li>
-                Google Analyticsを利用したサービスの利用状況分析および改善のため
-              </li>
             </ul>
           </article>
 
@@ -64,10 +56,6 @@ export default async function Page() {
               <li>法令に基づく場合</li>
               <li>サービス提供に必要な場合</li>
               <li>ユーザーの同意がある場合</li>
-              <li>
-                Google
-                Analyticsによる匿名データがGoogleの他のサービス（例：Google広告）と共有される場合
-              </li>
             </ul>
           </article>
 
@@ -82,27 +70,7 @@ export default async function Page() {
 
           <article>
             <h2 className="mb-2 text-xl font-semibold text-gray-700">
-              6. Cookieの使用について
-            </h2>
-            <p className="leading-relaxed text-gray-600">
-              本アプリは、Google
-              Analyticsを利用してCookieを使用し、ユーザーの利用状況を分析しています。Cookieの使用を希望しない場合は、ブラウザの設定により無効化することが可能です。また、Google
-              Analyticsのオプトアウト機能を利用することで、データ収集を停止することもできます。詳細については
-              <a
-                href="https://policies.google.com/privacy"
-                className="text-blue-600 underline"
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                Googleのプライバシーポリシー
-              </a>
-              をご参照ください。
-            </p>
-          </article>
-
-          <article>
-            <h2 className="mb-2 text-xl font-semibold text-gray-700">
-              7. プライバシーポリシーの変更
+              6. プライバシーポリシーの変更
             </h2>
             <p className="leading-relaxed text-gray-600">
               本ポリシーは、必要に応じて変更される場合があります。変更があった場合、ユーザーには適切な形で通知されます。
@@ -111,7 +79,7 @@ export default async function Page() {
 
           <article>
             <h2 className="mb-2 text-xl font-semibold text-gray-700">
-              8. お問い合わせ
+              7. お問い合わせ
             </h2>
             <p className="leading-relaxed text-gray-600">
               プライバシーポリシーに関する質問やご意見は、以下のアカウントまでお問い合わせください。
