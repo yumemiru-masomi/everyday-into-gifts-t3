@@ -50,6 +50,26 @@ export default async function Home() {
               </Link>
             </div>
           )}
+          {!session?.user && (
+            <div className="flex">
+              <Link
+                href={"/legal/terms"}
+                target="_blank"
+                className="text-sm text-white transition hover:text-gray-300"
+              >
+                利用規約
+              </Link>
+              <p className="text-sm text-white">・</p>
+              <Link
+                href={"/legal/privacy"}
+                target="_blank"
+                className="text-sm text-white transition hover:text-gray-300"
+              >
+                プライバシーポリシー
+              </Link>
+              <p className="text-sm">をご確認ください</p>
+            </div>
+          )}
         </div>
       </main>
     </HydrateClient>
